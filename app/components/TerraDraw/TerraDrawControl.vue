@@ -107,7 +107,7 @@ function toggleEditor() {
 function handleButtonClick(mode: TerradrawMode) {
   if (!terraDraw)
     return
-
+  console.log('handleButtonClick', mode)
   switch (mode) {
     case 'delete':
       terraDraw.clear()

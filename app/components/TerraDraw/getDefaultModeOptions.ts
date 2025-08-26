@@ -21,6 +21,18 @@ export interface ModeOptions {
 }
 
 export function getDefaultModeOptions() {
+  const commonPolygonSelectOptions = {
+    feature: {
+      draggable: true,
+      rotateable: true,
+      scaleable: true,
+      coordinates: {
+        midpoints: true,
+        draggable: true,
+        deletable: true,
+      },
+    },
+  }
   const modeOptions: ModeOptions = {
     'render': new TerraDrawRenderMode({
       modeName: 'render',
@@ -34,10 +46,12 @@ export function getDefaultModeOptions() {
     }),
     'polygon': new TerraDrawPolygonMode({
       editable: true,
+      // eslint-disable-next-line ts/ban-ts-comment
       // @ts-ignore
       validation: (feature: MapGeoJSONFeature, e: { updateType: string }) => {
         const updateType = e.updateType
         if (updateType === 'finish' || updateType === 'commit') {
+          // eslint-disable-next-line ts/ban-ts-comment
           // @ts-ignore
           return ValidateNotSelfIntersecting(feature)
         }
@@ -53,24 +67,20 @@ export function getDefaultModeOptions() {
     'sector': new TerraDrawSectorMode(),
     'select': new TerraDrawSelectMode({
       flags: {
-        point: {
+        'point': {
           feature: {
             draggable: true,
           },
         },
-        polygon: {
-          feature: {
-            draggable: true,
-            rotateable: true,
-            scaleable: true,
-            coordinates: {
-              midpoints: true,
-              draggable: true,
-              deletable: true,
-            },
-          },
-        },
-        linestring: {
+        'polygon': commonPolygonSelectOptions,
+        // 将通用的多边形配置应用到所有其他基于多边形的模式
+        'rectangle': commonPolygonSelectOptions,
+        'angled-rectangle': commonPolygonSelectOptions,
+        'circle': commonPolygonSelectOptions,
+        'freehand': commonPolygonSelectOptions,
+        'sensor': commonPolygonSelectOptions,
+        'sector': commonPolygonSelectOptions,
+        'linestring': {
           feature: {
             draggable: true,
             rotateable: true,
@@ -82,7 +92,18 @@ export function getDefaultModeOptions() {
             },
           },
         },
-        // ... (可以从原文件复制所有其他几何类型的默认选择配置)
+        'freehand-linestring': {
+          feature: {
+            draggable: true,
+            rotateable: true,
+            scaleable: true,
+            coordinates: {
+              midpoints: true,
+              draggable: true,
+              deletable: true,
+            },
+          },
+        },
       },
     }),
     'delete': new TerraDrawRenderMode({
