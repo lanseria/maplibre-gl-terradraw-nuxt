@@ -180,7 +180,7 @@ function downloadGeoJSON() {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @use './terradraw.scss';
 
 .hidden {
@@ -188,5 +188,12 @@ function downloadGeoJSON() {
 }
 .hidden-delete-selection {
   display: none !important;
+}
+
+.maplibregl-ctrl-group {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
 }
 </style>

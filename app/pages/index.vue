@@ -50,9 +50,9 @@ onMounted(() => {
       console.warn('Map has loaded.')
 
       // 添加其他控件
-      initialMap.addControl(new NavigationControl({ visualizePitch: true }), 'bottom-right')
-      initialMap.addControl(new GeolocateControl({ positionOptions: { enableHighAccuracy: true }, trackUserLocation: true }), 'bottom-right')
-      initialMap.addControl(new GlobeControl(), 'bottom-right')
+      initialMap.addControl(new NavigationControl({ visualizePitch: true }), 'top-right')
+      initialMap.addControl(new GeolocateControl({ positionOptions: { enableHighAccuracy: true }, trackUserLocation: true }), 'top-right')
+      initialMap.addControl(new GlobeControl(), 'top-right')
       initialMap.addControl(new ScaleControl(), 'bottom-left')
     })
   }
@@ -72,7 +72,6 @@ onUnmounted(() => {
       <!-- 将我们的新控件放在左下角 -->
       <StyleSwitcherControl
         v-if="map && mapLoaded"
-        class="custom-style-switcher"
         :map="map"
         :styles="styles"
         :initial-style-uri="styles[0]!.uri"
@@ -91,27 +90,5 @@ onUnmounted(() => {
   position: absolute;
   width: 100%;
   height: 100%;
-}
-.maplibregl-ctrl-group {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 1;
-}
-
-/* 为我们自己的控件添加定位样式 */
-.custom-style-switcher {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  z-index: 1;
-}
-
-/* 确保比例尺控件不会和我们的样式切换器重叠 */
-.maplibregl-ctrl-bottom-left .maplibregl-ctrl {
-  margin: 0 0 10px 10px;
-}
-.maplibregl-ctrl-bottom-left .custom-style-switcher {
-  margin: 0 0 10px 10px; /* 如果需要，可以调整间距 */
 }
 </style>

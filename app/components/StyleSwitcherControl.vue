@@ -32,7 +32,7 @@ function switchStyle(styleUri: string) {
 </script>
 
 <template>
-  <div class="maplibregl-ctrl maplibregl-ctrl-group style-switcher">
+  <div class="maplibregl-ctrl style-switcher style-switcher">
     <button
       class="style-switcher-button"
       title="Change map style"
@@ -56,7 +56,12 @@ function switchStyle(styleUri: string) {
 
 <style scoped>
 .style-switcher {
-  position: relative;
+  position: absolute;
+  bottom: 40px;
+  left: 10px;
+  z-index: 1;
+}
+.style-switcher {
   font-family:
     -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol';
