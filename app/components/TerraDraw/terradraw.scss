@@ -1,0 +1,141 @@
+// components/TerraDraw/terradraw.scss
+
+.maplibregl-terradraw-render-button {
+	background: url('./icons/render_on.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 90%;
+
+	&.enabled {
+		background: url('./icons/render_off.svg');
+		background-size: 100%;
+	}
+}
+
+.maplibregl-terradraw-add-point-button {
+	background: url('./icons/point.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 150%;
+}
+
+.maplibregl-terradraw-add-linestring-button {
+	background: url('./icons/linestring.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 80%;
+}
+
+.maplibregl-terradraw-add-polygon-button {
+	background: url('./icons/polygon.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 80%;
+}
+
+.maplibregl-terradraw-add-rectangle-button {
+	background: url('./icons/rectangle.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 80%;
+}
+
+.maplibregl-terradraw-add-angled-rectangle-button {
+	background: url('./icons/angled-rectangle.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+.maplibregl-terradraw-add-circle-button {
+	background: url('./icons/circle.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 80%;
+}
+
+.maplibregl-terradraw-add-freehand-button {
+	background: url('./icons/freehand.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 80%;
+}
+
+.maplibregl-terradraw-add-freehand-linestring-button {
+	background: url('./icons/freehand_line.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 80%;
+}
+
+.maplibregl-terradraw-add-select-button {
+	background: url('./icons/select.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 80%;
+
+	&:disabled {
+		background-color: rgb(235, 235, 228);
+	}
+}
+
+.maplibregl-terradraw-add-sensor-button {
+	background: url('./icons/sensor.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 80%;
+}
+
+.maplibregl-terradraw-add-sector-button {
+	background: url('./icons/sector.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+.maplibregl-terradraw-add-control {
+	display: block;
+
+	&.hidden {
+		display: none;
+	}
+
+	&.active {
+		background-color: #fbc412;
+	}
+}
+
+.maplibregl-terradraw-delete-button {
+	background: url('./icons/delete.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 90%;
+
+	&:disabled {
+		background-color: rgb(235, 235, 228);
+	}
+}
+
+.maplibregl-terradraw-delete-selection-button {
+	background: url('./icons/delete_selection.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 90%;
+
+	display: block;
+
+	&.hidden-delete-selection {
+		display: none;
+	}
+}
+
+.maplibregl-terradraw-download-button {
+	background: url('./icons/download.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 90%;
+
+	&:disabled {
+		background-color: rgb(235, 235, 228);
+	}
+}
