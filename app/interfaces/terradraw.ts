@@ -1,18 +1,8 @@
-// interfaces/terradraw.ts
-
+// app/interfaces/terradraw.ts
 import type {
-  TerraDrawAngledRectangleMode,
-  TerraDrawCircleMode,
-  TerraDrawFreehandLineStringMode,
-  TerraDrawFreehandMode,
-  TerraDrawLineStringMode,
-  TerraDrawPointMode,
   TerraDrawPolygonMode,
-  TerraDrawRectangleMode,
   TerraDrawRenderMode,
-  TerraDrawSectorMode,
   TerraDrawSelectMode,
-  TerraDrawSensorMode,
 } from 'terra-draw'
 
 /**
@@ -21,15 +11,6 @@ import type {
  * 它用于确保我们传递给 TerraDraw 实例的模式都是有效的。
  */
 export type TerradrawModeClass
-	= | TerraDrawAngledRectangleMode
-	  | TerraDrawCircleMode
-	  | TerraDrawFreehandMode
-	  | TerraDrawFreehandLineStringMode
-	  | TerraDrawLineStringMode
-	  | TerraDrawPointMode
-	  | TerraDrawPolygonMode
-	  | TerraDrawRectangleMode
-	  | TerraDrawSectorMode
-	  | TerraDrawSensorMode
+	= | TerraDrawPolygonMode
 	  | TerraDrawRenderMode
 	  | TerraDrawSelectMode

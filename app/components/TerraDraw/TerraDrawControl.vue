@@ -1,3 +1,4 @@
+<!-- app/components/TerraDraw/TerraDrawControl.vue -->
 <script setup lang="ts">
 import type maplibregl from 'maplibre-gl'
 import { TerraDraw } from 'terra-draw'
@@ -10,20 +11,10 @@ const props = defineProps<{
 // 定义你想要的模式
 const ALL_MODES = [
   'render',
-  'point',
-  'linestring',
   'polygon',
-  'rectangle',
-  'circle',
-  'freehand',
-  'freehand-linestring',
-  'angled-rectangle',
-  'sensor',
-  'sector',
   'select',
   'delete-selection',
   'delete',
-  'download',
 ]
 type TerradrawMode = (typeof ALL_MODES)[number]
 
@@ -67,7 +58,7 @@ onUnmounted(() => {
 const capitalize = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
 
 function isButtonDisabled(mode: TerradrawMode) {
-  if (['select', 'delete', 'download'].includes(mode)) {
+  if (['select', 'delete'].includes(mode)) {
     return featureCount.value === 0
   }
   return false
@@ -91,8 +82,8 @@ function getButtonClasses(mode: TerradrawMode) {
 
   return {
     ...baseClasses,
-    [`maplibregl-terradraw-add-${mode}-button`]: !['delete', 'download'].includes(mode),
-    [`maplibregl-terradraw-${mode}-button`]: ['delete', 'download'].includes(mode),
+    [`maplibregl-terradraw-add-${mode}-button`]: mode !== 'delete',
+    [`maplibregl-terradraw-${mode}-button`]: mode === 'delete',
   }
 }
 
@@ -121,9 +112,6 @@ function handleButtonClick(mode: TerradrawMode) {
       }
       break
     }
-    case 'download':
-      downloadGeoJSON()
-      break
     default: // 切换绘图模式
       if (activeMode.value === mode) {
         // 如果再次点击同一个按钮，则取消激活
@@ -135,23 +123,6 @@ function handleButtonClick(mode: TerradrawMode) {
         activeMode.value = mode
       }
   }
-}
-
-function downloadGeoJSON() {
-  if (!terraDraw)
-    return
-  const features = terraDraw.getSnapshot()
-  const fc = {
-    type: 'FeatureCollection',
-    features,
-  }
-  const dataStr = `data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(fc))}`
-  const download = document.createElement('a')
-  download.setAttribute('href', dataStr)
-  download.setAttribute('download', 'data.geojson')
-  document.body.appendChild(download)
-  download.click()
-  download.remove()
 }
 </script>
 
