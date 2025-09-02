@@ -53,6 +53,12 @@ export default defineNuxtConfig({
     },
   },
 
+  vite: {
+    optimizeDeps: {
+      include: ['maplibre-gl', 'terra-draw', 'terra-draw-maplibre-gl-adapter'],
+    },
+  },
+
   eslint: {
     config: {
       standalone: false,

@@ -8,7 +8,7 @@ import TerraDrawControl from '~/components/TerraDraw/TerraDrawControl.vue'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
 const mapContainer = ref<HTMLDivElement | null>(null)
-const map = ref<maplibregl.Map>()
+const map = shallowRef<maplibregl.Map>()
 const mapLoaded = ref(false) // 新增一个状态来跟踪地图是否加载完成
 
 // 定义要切换的样式列表
@@ -25,10 +25,6 @@ const styles: StyleDefinition[] = [
     title: 'Dark',
     uri: 'https://tiles.basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
   },
-  {
-    title: 'Maplibre',
-    uri: 'https://demotiles.maplibre.org/style.json',
-  },
 ]
 
 onMounted(() => {
@@ -37,10 +33,15 @@ onMounted(() => {
       container: mapContainer.value,
       // 使用样式列表中的第一个作为初始样式
       style: styles[0]!.uri,
-      center: [0, 0],
-      zoom: 1,
-      // 允许地图倾斜，以便看到3D效果
-      maxPitch: 85,
+      center: [122.14, 29.95],
+      zoom: 16,
+      minZoom: 15,
+      maxPitch: 0,
+      rollEnabled: false,
+      pitchWithRotate: false,
+      dragRotate: false,
+      touchPitch: false,
+      touchZoomRotate: false,
     })
 
     // 监听 'load' 事件
@@ -50,7 +51,7 @@ onMounted(() => {
       console.warn('Map has loaded.')
 
       // 添加其他控件
-      initialMap.addControl(new NavigationControl({ visualizePitch: true }), 'top-right')
+      initialMap.addControl(new NavigationControl({ visualizePitch: false, visualizeRoll: false, showCompass: false }), 'top-right')
       initialMap.addControl(new GeolocateControl({ positionOptions: { enableHighAccuracy: true }, trackUserLocation: true }), 'top-right')
       initialMap.addControl(new GlobeControl(), 'top-right')
       initialMap.addControl(new ScaleControl(), 'bottom-left')
