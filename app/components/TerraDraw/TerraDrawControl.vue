@@ -15,10 +15,11 @@ const ALL_MODES = [
   'select',
   'delete-selection',
   'delete',
-]
-type TerradrawMode = (typeof ALL_MODES)[number]
+] as const
 
-const modes = ref<TerradrawMode[]>(ALL_MODES)
+type TerradrawMode = typeof ALL_MODES[number]
+
+const modes = ref<TerradrawMode[]>([...ALL_MODES])
 const isExpanded = ref(true) // 默认展开
 const activeMode = ref<TerradrawMode | 'un-selected'>('un-selected')
 const featureCount = ref(0)
@@ -37,7 +38,6 @@ onMounted(() => {
     modes: enabledModes,
   })
 
-  // TerraDraw v1.x 使用 'start'
   terraDraw.start()
 
   // 监听要素变化以更新按钮状态
@@ -50,7 +50,6 @@ onMounted(() => {
 
 onUnmounted(() => {
   if (terraDraw) {
-    // TerraDraw v1.x 使用 'stop'
     terraDraw.stop()
   }
 })
@@ -98,7 +97,6 @@ function toggleEditor() {
 function handleButtonClick(mode: TerradrawMode) {
   if (!terraDraw)
     return
-  console.log('handleButtonClick', mode)
   switch (mode) {
     case 'delete':
       terraDraw.clear()
@@ -107,8 +105,9 @@ function handleButtonClick(mode: TerradrawMode) {
       break
     case 'delete-selection': {
       const selected = terraDraw.getSnapshot().filter(f => f.properties.selected)
+      console.warn('selected', selected)
       if (selected.length > 0) {
-        terraDraw.removeFeatures(selected.map(f => f.id))
+        terraDraw.removeFeatures(selected.map(f => f.id as string))
       }
       break
     }
@@ -127,7 +126,7 @@ function handleButtonClick(mode: TerradrawMode) {
 </script>
 
 <template>
-  <div class="maplibregl-ctrl maplibregl-ctrl-group">
+  <div class="maplibregl-ctrl-group">
     <!-- 展开/折叠按钮 ('render' mode) -->
     <button
       v-if="modes.includes('render')"
